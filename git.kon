@@ -1,0 +1,8 @@
+description=git support for kpm
+version=1.0.0
+author=Thomas Kunze
+package{
+  ignore[
+    .gitignore
+  ]
+}
