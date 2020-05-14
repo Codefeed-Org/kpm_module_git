@@ -47,12 +47,12 @@ end
 function gitGetDefaultDir(options)
   local path,file = string.match(options["repo"], "(.-)([^\\/]-%.?([^%.\\/]*))$")
   local i,j = file:find('.', 1, true)
-  return options["out"].. "\\"..string.sub(file, 1, i-1)
+  return options["out"].. "/"..string.sub(file, 1, i-1)
 end
 
 function gitGetVersion(path)
   script, name = open_temp_script()
-  script:write("pushd " .. path .. "\n")
+  script:write("pushd \"" .. path .. "\"\n")
   script:write("git rev-parse HEAD > version.txt\n")
   script:write("popd")
   io.close(script)  
@@ -80,7 +80,7 @@ end
 
 function gitClone(options)
   script, name = open_temp_script()
-  script:write("pushd " .. options["out"] .. "\n")
+  script:write("pushd \"" .. options["out"] .. "\"\n")
   script:write("git clone -q --branch " .. options["version"] .. " \"" .. options["repo"] .. "\"\n")
   script:write("popd")
   io.close(script)  
